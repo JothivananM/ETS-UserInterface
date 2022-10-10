@@ -1,0 +1,46 @@
+
+#example1_filter {
+    display: none;
+  }
+
+  input {
+    cursor: pointer;
+  }
+
+ #start-date,#end-date {
+    border: 1px solid #f5ecec;
+    background-color: #fcf5f5;
+    color: #978181;
+  }
+
+  #asterisk {
+    color: red;
+  }
+
+/* Media Queries responsive view */
+@media only screen and (max-width: 760px) {
+  #right-content {
+    margin: auto !important;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+
+th {
+  font-size: small;
+}
+
+#right-content, #left-content label {
+  font-size: smaller;
+}
+
+}
+
+@media only screen and (max-width: 369px) {
+  .btn {    
+    font-size: smaller !important;
+  } 
+  #btn-save,#btn-addRow {
+    margin-bottom: .5rem !important;
+  }
+}
