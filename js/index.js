@@ -1,102 +1,87 @@
+
+let employeeDetails = {};
+var empId = 'E0005';    
+
 $(document).ready(function() {
 
-  const person = {
-    name : "Khatt"
-  };
-
-  const personJSON = JSON.stringify(person);
-
-  localStorage.setItem("person",personJSON);
-
-  let employeeDetails = {};
-  let employeeId = 'E0005';    
-
   getTaskActiviy();
-
 });
 
-  const bindTaskActivity = () => {
-  $.each(employeeDetails, function(index, value) {
-      // APPEND OR INSERT DATA TO SELECT ELEMENT.
-      $('.select-task').append('<option value="' + value.taskId + '">' + value.taskName + '</option>');
-      // console.log("object",value.taskId);
+  const bindTaskActivity = (employeeDetails) => {
+    
+    console.log("object",employeeDetails);
+  $.each(employeeDetails.taskResponse, function(index, value) {
+      $('.select-task').append('<option value="' + value.taskId + '">' + value.taskName + '</option>');      
   });
 
-  $.each(employeeDetails, function(index, value) {
-    // APPEND OR INSERT DATA TO SELECT ELEMENT.
-    $('.select-activity').append('<option value="' + value.objectId + '">' + value.objectId + '</option>');
+  $.each(employeeDetails.activityResponse, function(index, value) {
+    $('.select-activity').append('<option value="' + value.InternalID + '">' + value.Description + '</option>');
   });
+
   }
 
   const getTaskActiviy = () => {
 
     var settings = {
-      "url": "https://zn5pe8sal5.execute-api.us-east-1.amazonaws.com/Development/employeetasks?employeeId=E0005",
+      "url": "https://zn5pe8sal5.execute-api.us-east-1.amazonaws.com/Development/employeetasks?employeeId="+empId,
       "method": "GET"
     };
     
     $.ajax(settings).done(function (response) {
 
       // console.log("RESPONSE",response.body.d.results);
-      employeeDetails = response.body.d.results.map(employee => ({ employeeId: employee.AssignedEmployeeID,
-                                                                  objectId: employee.ObjectID, 
-                                                                  taskName:employee.ProjectTask.Name,
-                                                                  taskId: employee.ProjectTask.ID,
-                                                                  statusCode:  employee.ProjectTask.ReleaseStatusCode,
-                                                                  statusCodeText: employee.ProjectTask.ReleaseStatusCodeText
-                                                                }));
-       console.log("EmployeeDetails",employeeDetails);  
+      employeeDetails = response.body;
       //  generateTable(employeeDetails);  
-     bindTaskActivity();
+      bindTaskActivity(employeeDetails);
 
     });
       
   } 
 
 
-  const generateTable = (records) => {
-    alert(records);
-      $('#table-id').DataTable({
-        paging:false,
-        // "responsive": true,
-        "lengthChange": false,
-        data: records,
+  // const generateTable = (records) => {
+  //   alert(records);
+  //     $('#table-id').DataTable({
+  //       paging:false,
+  //       // "responsive": true,
+  //       "lengthChange": false,
+  //       data: records,
 
-        columns : [
-              {data:records.taskId},
-              {data:records.objectId},
-              {data:records.employeeId}
-        ]
-        // 'columnDefs': [
-        //     {
-        //       'targets': [3,4, 5, 6, 7, 8, 9],
-        //       'render': function(data, type, row, meta){
+  //       columns : [
+  //             {data:records.taskId},
+  //             {data:records.objectId},
+  //             {data:records.employeeId}
+  //       ]
+  //       // 'columnDefs': [
+  //       //     {
+  //       //       'targets': [3,4, 5, 6, 7, 8, 9],
+  //       //       'render': function(data, type, row, meta){
 
-        //         if(type === 'display'){
-        //             var api = new $.fn.dataTable.Api(meta.settings);
+  //       //         if(type === 'display'){
+  //       //             var api = new $.fn.dataTable.Api(meta.settings);
 
-        //             var $el = $('select', api.cell({ row: meta.row, column: meta.col }).node());
+  //       //             var $el = $('select', api.cell({ row: meta.row, column: meta.col }).node());
 
-        //             var $html = $(data).wrap('<div/>').parent();
+  //       //             var $html = $(data).wrap('<div/>').parent();
 
-        //             if ($el.prop('tagName') === 'SELECT'){
-        //               // alert("SELECT");
-        //               $('option:selected', $html).removeAttr('selected');
-        //               $('option', $html).filter(function(){
-        //                   return ($(this).attr('value') === $el.val());
-        //               }).attr('selected', 'selected');
-        //             }
+  //       //             if ($el.prop('tagName') === 'SELECT'){
+  //       //               // alert("SELECT");
+  //       //               $('option:selected', $html).removeAttr('selected');
+  //       //               $('option', $html).filter(function(){
+  //       //                   return ($(this).attr('value') === $el.val());
+  //       //               }).attr('selected', 'selected');
+  //       //             }
                     
-        //           }
+  //       //           }
 
-        //         return data;
-        //         }          
-        //       }
+  //       //         return data;
+  //       //         }          
+  //       //       }
           
-        // ]
+  //       // ]
 
-    });  
-  }
+  //   });  
+  // }
 
  
   const createTableRow = () => {
@@ -186,19 +171,16 @@ $(document).ready(function() {
     +'</tr>';
 
     xTable.appendChild(tr);
-   let lastRow =  $("#table-id").find("tr").last();
+    let lastRow =  $("#table-id").find("tr").last();
     let tdTask = lastRow.children('td:eq(0)').find('.select-task');
     let tdActivity = lastRow.children('td:eq(0)').find('.select-activity');
 
-    $.each(employeeDetails, function(index, value) {
-        // APPEND OR INSERT DATA TO SELECT ELEMENT.
-        tdTask.append('<option value="' + value.taskId + '">' + value.taskName + '</option>');
-        // console.log("object",value.taskId);
+    $.each(employeeDetails.taskResponse, function(index, value) {
+      tdTask.append('<option value="' + value.taskId + '">' + value.taskName + '</option>');
     });
 
-    $.each(employeeDetails, function(index, value) {
-      // APPEND OR INSERT DATA TO SELECT ELEMENT.
-      tdActivity.append('<option value="' + value.objectId + '">' + value.objectId + '</option>');
+    $.each(employeeDetails.activityResponse, function(index, value) {
+      tdActivity.append('<option value="' + value.InternalID + '">' + value.Description + '</option>');
     });
 
   }
@@ -211,15 +193,20 @@ $(document).ready(function() {
     $('#text-status').val(selectedTaskStatus[0].statusCodeText);
   });  
 
-  const deleteTableRow = () => {
-    
-    if($("#table-id").find("tr").last()){
-      alert();
+  const deleteTableRow = () => {    
+    let table = document.getElementById('table-id');
+    let rowCount = table.rows.length;
+    if (rowCount > 2 ) {
+      table.deleteRow(rowCount -1);
     }
-    var table = document.getElementById('table-id');
-    var rowCount = table.rows.length;
-
-    table.deleteRow(rowCount -1);
+    else{
+      $(document).Toasts('create', {
+        class: 'bg-success',
+        title: 'Error',
+        // subtitle: 'Subtitle',
+        body: 'You cannot delete this row.'
+      })
+    }   
   }
 
 $(function () {
@@ -321,6 +308,14 @@ $(function () {
       $('#div-date-filter').addClass('d-flex').removeClass('d-block');
     }
   });
+
+  function scrollToTop () {
+    alert();
+    window.scroll({
+        top: 0,
+        behaviour: "smooth"
+    });
+};
 
   // Datatable
   // $("#example1").DataTable({
