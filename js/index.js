@@ -91,7 +91,7 @@ $(document).ready(function() {
     tr.innerHTML ='<tr>'
     +'<td><select name="" id="" class="select-task form-control form-control-border">      <option value="" selected>---</option>         </select></td>'
 
-    +'<td>'  
+    +'<td>' 
     +'  <select name="" id="" class="select-activity form-control form-control-border">'
     +'    <option value="" selected>---</option>'
     
@@ -173,7 +173,7 @@ $(document).ready(function() {
     xTable.appendChild(tr);
     let lastRow =  $("#table-id").find("tr").last();
     let tdTask = lastRow.children('td:eq(0)').find('.select-task');
-    let tdActivity = lastRow.children('td:eq(0)').find('.select-activity');
+    let tdActivity = lastRow.children('td:eq(1)').find('.select-activity');
 
     $.each(employeeDetails.taskResponse, function(index, value) {
       tdTask.append('<option value="' + value.taskId + '">' + value.taskName + '</option>');
@@ -196,7 +196,7 @@ $(document).ready(function() {
   const deleteTableRow = () => {    
     let table = document.getElementById('table-id');
     let rowCount = table.rows.length;
-    if (rowCount > 2 ) {
+    if (rowCount > 3 ) {
       table.deleteRow(rowCount -1);
     }
     else{

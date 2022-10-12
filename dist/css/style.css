@@ -3,9 +3,9 @@
     display: none;
   }
 
-  input {
-    cursor: pointer;
-  }
+ select {
+  cursor: pointer;
+ }
 
  #start-date,#end-date {
     border: 1px solid #f5ecec;
@@ -26,7 +26,7 @@
 
 @media only screen and (max-width: 1200px) {
 
-th {
+th,span {
   font-size: small;
 }
 
