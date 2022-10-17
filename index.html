@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Bootsrap -->
   <link rel="stylesheet" href="plugins/css.min.css">
-  <link rel="stylesheet" href="plugins-bootstrap4-theme-bootstrap4.min.css">
+  <!-- <link rel="stylesheet" href="plugins-bootstrap4-theme-bootstrap4.min.css"> -->
   <!-- Title Icon -->
   <link rel="icon" href="dist/img/timesheet-icon.png">
   <!-- toastr -->
@@ -31,10 +31,15 @@
   <link rel="stylesheet" href="dist/css/style.css">
 </head>
 
+<style>
+    #check-save{
+      color: rgb(126, 82, 82) !important;
+}
+</style>
+
 <body class="hold-transition sidebar-mini sidebar-collapse" style="background-color: rgb(250, 243, 243);">
 
     <main id="root">        
-
           <!-- Table Card -->
           <section class="content mt-5">
             
@@ -82,290 +87,74 @@
                       
                       <div class="d-flex justify-content-between">
                         <div class="inline-block mb-3">
-                          <button class="btn btn-primary btn-sm m-0" id="btn-addRow" onclick="createTableRow()"><i class="far fa-plus-square"></i>&nbsp;Add row</button>
-                          <button class="btn btn-danger btn-sm m-0" onclick="deleteTableRow()"><i class="far fa-minus-square"></i>&nbsp;Delete Row</button>  
+                          <button class="btn btn-secondary btn-sm m-0" id="btn-addRow" onclick="createTableRow()"><i class="far fa-plus-square"></i>&nbsp;Add row</button>
+                          <button class="btn btn-warning btn-sm m-0" onclick="deleteTableRow()"><i class="far fa-minus-square"></i>&nbsp;Delete Row</button>  
                         </div>
-  
+                        <div class="mx-auto">
+                          <span class="badge badge-primary">Saved</span>
+                          <span class="badge badge-info">Released</span>
+                          <span class="badge badge-success">Approved</span>
+                          <span class="badge badge-danger">Rejected</span>
+                        </div>
                         <div class="inline-block mb-3">
-                          <button class="btn btn-secondary btn-sm m-0" id="btn-save" onclick=""><i class="far fa-bookmark"></i>&nbsp;Save</button>
-                          <button class="btn btn-secondary btn-sm m-0" onclick=""><i class="far fa-paper-plane"></i>&nbsp;Release</button>  
+                            <span type="text" class="bg-primary" name="" id="check-save" style="width: .2 rem;"></span>
+                            <span type="text" class="bg-primary" name="" id="check-save"></span>
+                            <span type="text" class="bg-primary" name="" id="check-save"></span>
+                        </div>  
+                        <div class="inline-block mb-3">
+                          <button class="btn btn-primary btn-sm m-0" id="btn-save" onclick=""><i class="far fa-bookmark"></i>&nbsp;Save</button>
+                          <button class="btn btn-info btn-sm m-0" onclick=""><i class="far fa-paper-plane"></i>&nbsp;Release</button>  
                         </div>
                       </div>
                      
-                      <table id="table-id" class="table table-responsive p-0" cellspacing="0" width="100%" style="width: 100% !important;">
+                      <div class="container">
+                        <table id="table-id" class="table table-bordered table-responsive p-0" cellspacing="0" width="100%">
                        
-                        <thead>
-                          <tr>                           
-                            <th>Task</th>
-                            <th>Activity</th>                           
-                            <th>PurchaseOrder</th>
-                            <th class="d-grid">
-                                <label for="day">Sunday</label>
-                               <label for="" id="sun"></label>
+                          <thead class="thead-light">
+                            <tr>                           
+                              <th>Task</th>
+                              <th>Activity</th>                           
+                              <th>PurchaseOrder</th>
+                              <th class="d-grid">
+                                  <label for="day">Sunday</label><br>
+                                 <label for="" id="sun"></label>
+                              </th>
+                              <th class="d-grid">
+                                  <label for="day">Monday</label><br>
+                                 <label for="" id="mon"></label>
+                              </th>
+                              <th class="d-grid">
+                                <label for="day">Tuesday</label><br>
+                                <label for="" id="tue"></label>
                             </th>
-                            <th class="d-grid">
-                                <label for="day">Monday</label>
-                               <label for="" id="mon"></label>
+                              <th class="d-grid">
+                                  <label for="day">Wednesday</label><br>
+                                 <label for="" id="wed"></label>
+                              </th>
+                              <th class="d-grid">
+                                <label for="day">Thursday</label><br>
+                                <label for="" id="thur"></label>
                             </th>
-                            <th class="d-grid">
-                              <label for="day">Tuesday</label>
-                              <label for="" id="tue"></label>
-                          </th>
-                            <th class="d-grid">
-                                <label for="day">Wednesday</label>
-                               <label for="" id="wed"></label>
-                            </th>
-                            <th class="d-grid">
-                              <label for="day">Thursday</label>
-                              <label for="" id="thur"></label>
-                          </th>
-                            <th class="d-grid">
-                                <label for="day">Friday</label>
-                               <label for="" id="fri"></label>
-                            </th>
-                            <th class="d-grid">
-                                <label for="day">Saturday</label>
-                               <label for="" id="sat"></label>
-                            </th>
-                          </tr>
-                        </thead>
-
-                        <tbody>
-                         
-                          <tr>
-
-                            <td>
-                                  <span for="label-task">MCP-01</span>
-                            </td>
-                            
-      
-                            <td>
-                                  <span for="label-activity">MCP-01</span>
-                            </td>
-                            
-
-                            <td>
-                                  <label for="label-po"></label>
-                            </td>
-                            
-                            <td>  
-                              <select name="" id="" class="form-control" disabled>
-                                  <option value="" >0</option>
-                                  <option value="quarterDay"selected>.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control" disabled>
-                                  <option value="">0</option>
-                                  <option value="quarterDay">.25 Day</option>
-                                  <option value="halfDay" selected>.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control" disabled>
-                                  <option value="">0</option>
-                                  <option value="quarterDay">.25 Day</option>
-                                  <option value="halfDay" selected>.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control" disabled>
-                                  <option value="" >0</option>
-                                  <option value="quarterDay"selected>.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control" disabled>
-                                  <option value="">0</option>
-                                  <option value="quarterDay">.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay" selected>1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control" disabled>
-                                  <option value="">0</option>
-                                  <option value="quarterDay" selected>.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control" disabled>
-                                <option value="" >0</option>
-                                <option value="quarterDay" selected>.25 Day</option>
-                                <option value="halfDay">.50 Day</option>
-                                <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                          </tr>
-
-                          <tr>
-
-                            <td>
-                              <span for="label-task">MCP-01</span>
-                            </td>
-      
-                            <td>
-                              <span for="label-activity">MCP-01</span>
-                            </td>
-
-                            <td>
-                              <!-- <span for="label-po">MCP-01</span> -->
-                            </td>                          
-
-                            <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control" disabled>
-                                  <option value="">0</option>
-                                  <option value="quarterDay" selected>.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control" disabled>
-                                <option value="" selected>0</option>
-                                <option value="quarterDay" selected>.25 Day</option>
-                                <option value="halfDay">.50 Day</option>
-                                <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                          </tr>
-
-                          <tr>
-                                  
-                            <td>  
-                              <select name="" id="" class="select-task form-control form-control form-control-border border-width-2">
-                                <option value="" selected>---</option>
-                                  
-                              </select>
-                            </td>
-      
-                            <td>  
-                              <select name="" id="" class="select-activity form-control form-control form-control-border border-width-2">
-                                <option value="" selected>---</option>
-                                
-                              </select>
-                            </td>
-
-                            <td>  
-                              <select name="" id="select-po" class="form-control form-control-border border-width-2">
-                                <option value="" selected>---</option>
-                                
-                              </select>
-                            </td>
-                          
-
-                            <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control">
-                                <option value="" selected>0</option>
-                                <option value="quarterDay">.25 Day</option>
-                                <option value="halfDay">.50 Day</option>
-                                <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                          </tr>
-
-                        </tbody>
-
-                        <tfoot>
-                      
-                        </tfoot>
-                      </table>
+                              <th class="d-grid">
+                                  <label for="day">Friday</label><br>
+                                 <label for="" id="fri"></label>
+                              </th>
+                              <th class="d-grid">
+                                  <label for="day">Saturday</label><br>
+                                 <label for="" id="sat"></label>
+                              </th>
+                            </tr>
+                          </thead>
+  
+                          <tbody id="emp_body">
+  
+                          </tbody>
+  
+                          <tfoot>
+                        
+                          </tfoot>
+                        </table>
+                      </div>
                      
                     </div>
                     <!-- /.card-body -->
