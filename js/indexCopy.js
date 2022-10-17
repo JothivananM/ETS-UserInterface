@@ -1,10 +1,246 @@
 
-let employeeDetails = {};
-var empId = 'E0005';    
+let employeeDetails = [{
+  "TaskId":"Task-01",
+  "TaskName":"Support",
+  "ActivityId":"Activity-01",
+  "ActivityName":"Production",
+  "TaskStatus":"Booked",
+  "WeekEntry":[
+      {
+          "BookedHours":"2hrs",
+          "Status":"1",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"1",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"4",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"2",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"2",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"1",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"3",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      }
+  ]
+},
+{
+  "TaskId":"Task-02",
+  "TaskName":"Review",
+  "ActivityId":"Activity-02",
+  "ActivityName":"Rent",
+  "TaskStatus":"Booked",
+  "WeekEntry":[
+      {
+          "BookedHours":"2hrs",
+          "Status":"4",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"2",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"1",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"3",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      }
+  ]
+},
+{
+  "TaskId":"Task-03",
+  "TaskName":"Test",
+  "ActivityId":"Activity-03",
+  "ActivityName":"Editing",
+  "TaskStatus":"NotBooked",
+  "WeekEntry":[
+      {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"0",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      }
+  ]
+}
+];
+
+// var empId = 'E0005';    
 
 $(document).ready(function() {
   getTaskActiviy();
 });
+
+
+function generate_table(displayRecords) {
+
+	var count = 1;
+	var tr;
+	$('#emp_body').html('');
+
+	$.each(
+		displayRecords,
+    function (i,l) { 
+      tr = $('<tr/>');
+      tr.append("<td>" + displayRecords[i].TaskName + "</td>");
+      if (displayRecords[i].TaskStatus == 'NotBooked') {
+        tr.append( '<td>' 
+        +'  <select name="" id="" class="form-control">'
+        +'      <option value="" selected>---</option>'
+        +'      <option value="quarterDay">Production</option>'
+        +'      <option value="halfDay">Rent</option>'
+        +'      <option value="fullDay">Editing</option>'
+        +'    </select>'
+        +'</td>')
+      }
+      else{
+      tr.append("<td>" + displayRecords[i].ActivityName + "</td>");
+      }
+      tr.append("<td>-</td>");  
+
+     $.each(
+      displayRecords[i].WeekEntry,
+      function (j,l) {  
+
+        if(displayRecords[i].WeekEntry[j].Status == '0') {
+              tr.append( '<td>' 
+              +'  <select name="" id="" class="form-control">'
+              +'      <option value="" selected>0</option>'
+              +'      <option value="quarterDay">.25 Day</option>'
+              +'      <option value="halfDay">.50 Day</option>'
+              +'      <option value="fullDay">1 Day</option>'
+              +'    </select>'
+              +'</td>')
+          } 
+          else if(displayRecords[i].WeekEntry[j].Status == '1') {
+          tr.append("<td><label class='text-primary'>" + displayRecords[i].WeekEntry[j].BookedHours + "</label></td>");  
+          }  
+          else if(displayRecords[i].WeekEntry[j].Status == '2') {
+          tr.append("<td><label class='text-info'>" + displayRecords[i].WeekEntry[j].BookedHours + "</label></td>");  
+          } 
+          else if(displayRecords[i].WeekEntry[j].Status == '3') {
+            tr.append("<td><label class='text-success'>" + displayRecords[i].WeekEntry[j].BookedHours + "</label></td>");  
+          }  
+          else{
+            tr.append("<td><label class='text-danger'>" + displayRecords[i].WeekEntry[j].BookedHours + "</label></td>");  
+          }     
+      }
+     )
+     $('#emp_body').append(tr);
+     });
+ 
+}
+
 
   const bindTaskActivity = (employeeDetails) => {
     
@@ -21,39 +257,10 @@ $(document).ready(function() {
 
   const getTaskActiviy = () => {
 
-    var settings = {
-      "url": "https://zn5pe8sal5.execute-api.us-east-1.amazonaws.com/Development/employeetasks?employeeId="+empId,
-      "method": "GET"
-    };
-    
-    // $.ajax(settings)
-    // .done(function (response) {
-    //   alert();
-    //   // console.log("RESPONSE",response.body.d.results);
-    //   employeeDetails = response.body;
-    //   //  generateTable(employeeDetails);  
-    //   bindTaskActivity(employeeDetails);
-    // });
+    console.log((employeeDetails));
 
-    $.ajax({
-      url: "https://zn5pe8sal5.execute-api.us-east-1.amazonaws.com/Development/employeetasks?employeeId="+empId,
-        type: 'get',
-        beforeSend: function(){
-        },
-        success: function(response){
-          employeeDetails = response.body;
-          //  generateTable(employeeDetails);  
-          bindTaskActivity(employeeDetails);
-        },
-        complete:function(){
-         // Hide image container
-         $(".lds-ring").hide();
-        }
-       });
-
-      
-  } 
-
+    generate_table(employeeDetails);
+    }
 
   // const generateTable = (records) => {
   //   alert(records);
@@ -202,12 +409,12 @@ $(document).ready(function() {
   }
   
   
-  $("select.select-task").change (function () {  
-    $('#text-status').val('');
-    var selectedTask = $(this).children("option:selected").text();   
-    let selectedTaskStatus = employeeDetails.filter(temp => temp.taskName == selectedTask);
-    $('#text-status').val(selectedTaskStatus[0].statusCodeText);
-  });  
+  // $("select.select-task").change (function () {  
+  //   $('#text-status').val('');
+  //   var selectedTask = $(this).children("option:selected").text();   
+  //   let selectedTaskStatus = employeeDetails.filter(temp => temp.taskName == selectedTask);
+  //   $('#text-status').val(selectedTaskStatus[0].statusCodeText);
+  // });  
 
   const deleteTableRow = () => {    
     let table = document.getElementById('table-id');

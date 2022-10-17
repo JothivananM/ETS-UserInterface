@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Bootsrap -->
   <link rel="stylesheet" href="plugins/css.min.css">
-  <link rel="stylesheet" href="plugins-bootstrap4-theme-bootstrap4.min.css">
+  <!-- <link rel="stylesheet" href="plugins-bootstrap4-theme-bootstrap4.min.css"> -->
   <!-- Title Icon -->
   <link rel="icon" href="dist/img/timesheet-icon.png">
   <!-- toastr -->
@@ -34,7 +34,6 @@
 <body class="hold-transition sidebar-mini sidebar-collapse" style="background-color: rgb(250, 243, 243);">
 
     <main id="root">        
-
           <!-- Table Card -->
           <section class="content mt-5">
             
@@ -92,7 +91,7 @@
                         </div>
                       </div>
                      
-                      <table id="table-id" class="table table-responsive p-0" cellspacing="0" width="100%" style="width: 100% !important;">
+                      <table id="table-id" class="table table-responsive p-0" cellspacing="0" width="100%" style="width: 100% !important;table-layout:fixed !important">
                        
                         <thead>
                           <tr>                           
@@ -208,7 +207,7 @@
 
                           <tr>
 
-                            <td>
+                            <td class="text-truncate">
                               <span for="label-task">MCP-01</span>
                             </td>
       
@@ -221,25 +220,25 @@
                             </td>                          
 
                             <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
+                              <select name="" id="" class="form-control" disabled>
+                                  <option value="" >0</option>
+                                  <option value="quarterDay"selected>.25 Day</option>
                                   <option value="halfDay">.50 Day</option>
                                   <option value="fullDay">1 Day</option>
                                 </select>
                             </td>
                             <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
+                              <select name="" id="" class="form-control" disabled>
+                                  <option value="" >0</option>
+                                  <option value="quarterDay"selected>.25 Day</option>
                                   <option value="halfDay">.50 Day</option>
                                   <option value="fullDay">1 Day</option>
                                 </select>
                             </td>
                             <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
+                              <select name="" id="" class="form-control" disabled>
+                                  <option value="" >0</option>
+                                  <option value="quarterDay"selected>.25 Day</option>
                                   <option value="halfDay">.50 Day</option>
                                   <option value="fullDay">1 Day</option>
                                 </select>
@@ -253,24 +252,24 @@
                                 </select>
                             </td>
                             <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
-                                  <option value="halfDay">.50 Day</option>
-                                  <option value="fullDay">1 Day</option>
-                                </select>
-                            </td>
-                            <td>  
-                              <select name="" id="" class="form-control">
-                                  <option value="" selected>0</option>
-                                  <option value="quarterDay">.25 Day</option>
+                              <select name="" id="" class="form-control" disabled>
+                                  <option value="" >0</option>
+                                  <option value="quarterDay"selected>.25 Day</option>
                                   <option value="halfDay">.50 Day</option>
                                   <option value="fullDay">1 Day</option>
                                 </select>
                             </td>
                             <td>  
                               <select name="" id="" class="form-control" disabled>
-                                <option value="" selected>0</option>
+                                  <option value="" >0</option>
+                                  <option value="quarterDay"selected>.25 Day</option>
+                                  <option value="halfDay">.50 Day</option>
+                                  <option value="fullDay">1 Day</option>
+                                </select>
+                            </td>
+                            <td>  
+                              <select name="" id="" class="form-control" disabled>
+                                <option value="" >0</option>
                                 <option value="quarterDay" selected>.25 Day</option>
                                 <option value="halfDay">.50 Day</option>
                                 <option value="fullDay">1 Day</option>
