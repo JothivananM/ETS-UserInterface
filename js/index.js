@@ -1,59 +1,268 @@
 
-let employeeDetails = {};
-var empId = 'E0005';    
+let employeeDetails = [{
+  "TaskId":"Task-01",
+  "TaskName":"Support",
+  "ActivityId":"Activity-01",
+  "ActivityName":"Production",
+  "TaskStatus":"Booked",
+  "WeekEntry":[
+      {
+          "BookedHours":"2hrs",
+          "Status":"1",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"1",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"4",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"2",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"2",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"1",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"3",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      }
+  ]
+},
+{
+  "TaskId":"Task-02",
+  "TaskName":"Review",
+  "ActivityId":"Activity-02",
+  "ActivityName":"Rent",
+  "TaskStatus":"Booked",
+  "WeekEntry":[
+      {
+          "BookedHours":"2hrs",
+          "Status":"4",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"2",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"1",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"3",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      }
+  ]
+},
+{
+  "TaskId":"Task-03",
+  "TaskName":"Test",
+  "ActivityId":"Activity-03",
+  "ActivityName":"Editing",
+  "TaskStatus":"NotBooked",
+  "WeekEntry":[
+      {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"0",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      },
+       {
+          "BookedHours":"2hrs",
+          "Status":"0",
+          "BookedDate":"",
+          "InternalDesc":"",
+          "Desc":""
+      }
+  ]
+}
+];
+
+let taskActivity;
+// var empId = 'E0005';    
 
 $(document).ready(function() {
   getTaskActiviy();
 });
 
-  const bindTaskActivity = (employeeDetails) => {
-    
-    console.log("object",employeeDetails);
-  $.each(employeeDetails.taskResponse, function(index, value) {
-      $('.select-task').append('<option value="' + value.taskId + '">' + value.taskName + '</option>');      
-  });
 
-  $.each(employeeDetails.activityResponse, function(index, value) {
+function generate_table(displayRecords) {
+
+	var tr;
+	$('#emp_body').html('');
+
+	$.each(
+		displayRecords,
+    function (i,l) { 
+      tr = $('<tr/>');
+      tr.append("<td>" + displayRecords[i].TaskName + "</td>");
+      if (displayRecords[i].TaskStatus == 'NotBooked') {
+        tr.append( '<td>' 
+        +'  <select name="" id="" class="select-activity form-control form-control-border ">'
+        +'      <option value="" selected>---</option>'
+      
+        +'    </select>'
+        +'</td>')
+
+      }
+      else{
+      tr.append("<td>" + displayRecords[i].ActivityName + "</td>");
+      }
+      tr.append("<td>-</td>");  
+
+     $.each(
+      displayRecords[i].WeekEntry,
+      function (j,l) {  
+
+        if(displayRecords[i].WeekEntry[j].Status == '0') {
+              tr.append( '<td>' 
+              +'  <select name="" id="" class="form-control form-control-border ">'
+              +'      <option value="" selected>0</option>'
+              +'      <option value="quarterDay">.25 Day</option>'
+              +'      <option value="halfDay">.50 Day</option>'
+              +'      <option value="fullDay">1 Day</option>'
+              +'    </select>'
+              +'</td>')
+          } 
+          else if(displayRecords[i].WeekEntry[j].Status == '1') {
+          tr.append("<td><label class='text-primary'title='Saved'>" + displayRecords[i].WeekEntry[j].BookedHours + "</label></td>");  
+          }  
+          else if(displayRecords[i].WeekEntry[j].Status == '2') {
+          tr.append("<td><label class='text-info'title='Released'>" + displayRecords[i].WeekEntry[j].BookedHours + "</label></td>");  
+          } 
+          else if(displayRecords[i].WeekEntry[j].Status == '3') {
+            tr.append("<td><label class='text-success'title='Submitted'>" + displayRecords[i].WeekEntry[j].BookedHours + "</label></td>");  
+          }  
+          else{
+            tr.append("<td><label class='text-danger'title='Rejected'>" + displayRecords[i].WeekEntry[j].BookedHours + "</label></td>");  
+          }     
+      }
+     )
+     $('#emp_body').append(tr);
+     });
+ 
+}
+
+
+  const bindTaskActivity = (taskActivity) => {
+    
+    console.log("object",taskActivity);
+
+  $.each(taskActivity.activityResponse, function(index, value) {
     $('.select-activity').append('<option value="' + value.InternalID + '">' + value.Description + '</option>');
   });
 
   }
 
   const getTaskActiviy = () => {
-
-    var settings = {
-      "url": "https://zn5pe8sal5.execute-api.us-east-1.amazonaws.com/Development/employeetasks?employeeId="+empId,
-      "method": "GET"
-    };
-    
-    // $.ajax(settings)
-    // .done(function (response) {
-    //   alert();
-    //   // console.log("RESPONSE",response.body.d.results);
-    //   employeeDetails = response.body;
-    //   //  generateTable(employeeDetails);  
-    //   bindTaskActivity(employeeDetails);
-    // });
+    generate_table(employeeDetails);
 
     $.ajax({
-      url: "https://zn5pe8sal5.execute-api.us-east-1.amazonaws.com/Development/employeetasks?employeeId="+empId,
-        type: 'get',
-        beforeSend: function(){
-        },
-        success: function(response){
-          employeeDetails = response.body;
-          //  generateTable(employeeDetails);  
-          bindTaskActivity(employeeDetails);
-        },
-        complete:function(){
-         // Hide image container
-         $(".lds-ring").hide();
-        }
-       });
-
-      
-  } 
-
+      url: "https://tjg5g0jtu2.execute-api.us-east-1.amazonaws.com/Development/taskactivity?employeeId=E0005", 
+      success: function(result){
+        console.log("RESULT",result.body);
+        taskActivity = result.body;
+        console.log("TASK",taskActivity);
+        bindTaskActivity(taskActivity);
+    }});
+    }
 
   // const generateTable = (records) => {
   //   alert(records);
@@ -105,7 +314,9 @@ $(document).ready(function() {
 
     var tr=document.createElement('tr');
     tr.innerHTML ='<tr>'
-    +'<td><select name="" id="" class="select-task form-control form-control-border">      <option value="" selected>---</option>         </select></td>'
+    +'<td>'
+    +'<select name="" id="" class="select-task form-control form-control-border"> '     
+    +'<option value="" selected>---</option>         </select></td>'
 
     +'<td>' 
     +'  <select name="" id="" class="select-activity form-control form-control-border">'
@@ -116,7 +327,7 @@ $(document).ready(function() {
 
     +'<td>'  
     +'  <select name="" id="select-po" class="form-control form-control-border">'
-    +'    <option value="" selected>---</option>'
+    +'    <option value="" selected>-</option>'
    
     +'  </select>'
     +'</td>'
@@ -191,24 +402,17 @@ $(document).ready(function() {
     let tdTask = lastRow.children('td:eq(0)').find('.select-task');
     let tdActivity = lastRow.children('td:eq(1)').find('.select-activity');
 
-    $.each(employeeDetails.taskResponse, function(index, value) {
+    $.each(taskActivity.taskResponse, function(index, value) {
       tdTask.append('<option value="' + value.taskId + '">' + value.taskName + '</option>');
     });
 
-    $.each(employeeDetails.activityResponse, function(index, value) {
+    $.each(taskActivity.activityResponse, function(index, value) {
       tdActivity.append('<option value="' + value.InternalID + '">' + value.Description + '</option>');
     });
 
   }
   
-  
-  $("select.select-task").change (function () {  
-    $('#text-status').val('');
-    var selectedTask = $(this).children("option:selected").text();   
-    let selectedTaskStatus = employeeDetails.filter(temp => temp.taskName == selectedTask);
-    $('#text-status').val(selectedTaskStatus[0].statusCodeText);
-  });  
-
+ 
   const deleteTableRow = () => {    
     let table = document.getElementById('table-id');
     let rowCount = table.rows.length;
