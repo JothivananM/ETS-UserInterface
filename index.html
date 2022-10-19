@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="plugins/css.min.css" />
     <link rel="icon" href="dist/img/timesheet-icon.png" />
     <!-- toastr -->
-  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+    <link rel="stylesheet" href="plugins/toastr/toastr.min.css" />
     <link rel="stylesheet" href="dist/css/adminlte.min.css" />
     <title>Timesheet | Login</title>
   </head>
@@ -16,6 +16,11 @@
   <style>
     body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .img-illustration {
+      margin-top: 3rem;
+      padding: 2rem;
+      border-right: 1px solid lightgray;
     }
   </style>
 
@@ -34,14 +39,14 @@
     >
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col col-xl-10">
+          <div class="col col-xl-9">
             <div class="card" style="border-radius: 1rem">
               <div class="row g-0">
                 <div class="col-md-6 col-lg-5 d-none d-md-block">
                   <img
                     src="dist/img/timesheet_login.png"
                     alt="login form"
-                    class="mt-5 img-fluid"
+                    class="img-illustration img-fluid"
                   />
                 </div>
                 <div class="col-md-6 col-lg-7 d-flex align-items-center">
@@ -93,8 +98,18 @@
                         </button>
                       </div>
 
-                      <span class="small text-muted">Terms of use.</span>
-                      <span class="small text-muted">Privacy policy</span>
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <!-- <span class="large text-muted">Terms of use.</span>
+                          <span class="large text-muted">Privacy policy</span> -->
+                        </div>
+
+                        <div>
+                          <a href="Forgottenpassword.html" class="large text-blue" style="cursor:pointer;" 
+                            >Forgotten password?
+                          </a>
+                        </div>
+                      </div>
                     </form>
                   </div>
                 </div>

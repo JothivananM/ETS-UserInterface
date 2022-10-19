@@ -272,7 +272,7 @@ function generate_table(displayRecords) {
 
 const bindTaskActivity = (taskActivity) => {
 
-  console.log("object", taskActivity);
+  //console.log("object", taskActivity);
 
   $.each(taskActivity.activityResponse, function (index, value) {
     $('.select-activity').append('<option value="' + value.InternalID + '">' + value.Description + '</option>');
@@ -291,9 +291,9 @@ const getTaskActiviy = () => {
       Authorization: value
     },
     success: function (result) {
-      console.log("RESULT", result.body);
+      //console.log("RESULT", result.body);
       taskActivity = result.body;
-      console.log("TASK", taskActivity);
+     // console.log("TASK", taskActivity);
       bindTaskActivity(taskActivity);
     }
   });
@@ -606,32 +606,5 @@ $(function () {
 
 
 
-function logOutUser() {
 
-
-  var poolData = {
-    UserPoolId: 'us-east-1_ap254UA5W',
-    ClientId: '682d7lgi6cbghv9ue13gbqfqom'
-  };
-  var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-
-  var cognitoUser = userPool.getCurrentUser();
-  console.log(cognitoUser);
-  console.log(cognitoUser, "signing out...");
-  cognitoUser.signOut();
-
-  window.location = './index.html';
-
-  var value = $.cookie("auth");
-
-  // allCookies = document.cookie;
-  //  document.cookie = "auth=; path=/;"
-  //$.removeCookie(auth);
-
-  document.cookie.split(";").forEach(function (c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
-
-
-
-  // alert(value);
-}
 
